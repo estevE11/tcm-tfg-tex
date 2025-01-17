@@ -1,0 +1,214 @@
+\documentclass[12pt, twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{txfonts}
+\usepackage[normalem]{ulem}
+\usepackage{wasysym}
+%\usepackage[backend=biber, sorting=none]{biblatex}
+\usepackage[style=ieee, backend=biber, sorting=none]{biblatex}
+\addbibresource{bibliography.bib}
+\usepackage[paperheight=29.69cm,paperwidth=21.01cm,left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm]{geometry}
+\usepackage{pgfgantt}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{caption} % Per personalitzar els peus de figura
+\usepackage{pgfplots} % For graphs
+\usepackage{lipsum} % For lorem ipsum placeholder text
+
+\pgfplotsset{compat=1.18} % Ensure compatibility
+
+% Avoid indentation for all paragraphs
+\setlength{\parindent}{0pt}
+
+\setlength{\parskip}{0.5em}
+
+% Define the custom header command in the preamble
+\newcommand{\header}[1]{%
+    \vspace{1\baselineskip}
+    \noindent\textbf{#1}%
+}
+
+\newcommand{\br}[1]{%
+    \vspace{1\baselineskip}
+}
+
+\title{Titol}
+\author{Autor}
+
+% Configuració de capçaleres amb fancyhdr
+\pagestyle{fancy}
+\fancyhf{} % Esborra capçaleres i peus predeterminats
+
+% Capçalera pàgines senars
+\fancyhead[LO]{\makebox[\textwidth][l]{\textit{\fontsize{10}{12}\selectfont\nouppercase{\leftmark}}\hfill\textit{\fontsize{10}{12}\selectfont\thepage}}}
+
+% Capçalera pàgines parells
+\fancyhead[RE]{\makebox[\textwidth][l]{\textit{\fontsize{10}{12}\selectfont\thepage}\hfill\textit{\fontsize{10}{12}\selectfont Titol – Avantprojecte}}}
+
+% Assegurar-se que totes les seccions comencen en pàgina senar
+\newcommand{\sectionbreak}{\cleardoublepage} % Per forçar una nova pàgina senar
+
+% Configuració de numeració per a seccions com a capítols
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+% Ajust de la capçalera
+\renewcommand{\headrulewidth}{0pt} % Elimina la línia sota la capçalera
+
+% Configuració del format del peu de figura
+\captionsetup{
+    format=plain,
+    labelsep=period, % Punt després del número de la figura
+}
+
+% Redefine \thesubsubsection to avoid showing '0' in numbering
+\makeatletter
+\renewcommand{\thesubsubsection}{%
+  \ifnum\value{subsubsection}=0
+    \thesubsection % Use only subsection if subsubsection is 0
+  \else
+    \thesubsection.\arabic{subsubsection} % Normal numbering if subsubsection exists
+  \fi
+}
+\makeatother
+
+% Configure the numbering of figures and tables
+\renewcommand{\thefigure}{\thesubsubsection.\arabic{figure}}
+\renewcommand{\thetable}{\thesubsubsection.\arabic{table}}
+\counterwithin{figure}{subsubsection}
+\counterwithin{table}{subsubsection}
+
+\usepackage{tocloft}
+% Adjust spacing for List of Figures and Tables
+\setlength{\cftfignumwidth}{3.5em} % Adjust width for figure numbers
+\setlength{\cfttabnumwidth}{3.5em} % Adjust width for table numbers
+
+
+\begin{document}
+
+
+\thispagestyle{empty}
+\begin{center}
+\resizebox{0.8\textwidth}{!}{\includegraphics{logo_tcm_upc_docs.png}}\\
+
+\vspace{2cm}
+\large{Degree in Computer Engineering for Management and Information Systems}
+
+\par
+\vspace{4cm}
+
+\huge{\thetitle}
+
+\vspace{3cm}
+\huge{Avantprojecte}
+
+\end{center}
+
+\vspace{3.5cm}
+\begin{flushright}
+    
+\large{\theauthor}
+
+\large{Tutor: Tutor}
+
+\large{2024-25}
+
+\end{flushright}
+
+\begin{center}
+
+\resizebox{0.5\textwidth}{!}{\includegraphics{logo_tcm.png}}\\
+
+\end{center}
+
+\newpage
+
+%%%%%%%%%%%%  This Produces Abstract  %%%%%%%%%%%%
+%\pagenumbering{gobble} % Amaga la numeració de pàgina
+%\section*{Abstract}
+%Aquest és el contingut de l'abstract o resum.
+
+%\section*{Resum}
+%Aquest és el contingut de l'abstract o resum.
+
+%\section*{Resumen}
+%Aquest és el contingut de l'abstract o resum.
+
+% Comença la numeració des de l'índex
+\clearpage
+\thispagestyle{empty}
+
+%%%%%%%%%%%%  This Produces Table Of Contents  %%%%%%%%%%%%
+\pagenumbering{roman} % Reinicia el format de números de pàgina
+\setcounter{page}{1}
+\tableofcontents
+\clearpage
+
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\clearpage
+
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\clearpage
+
+\section{Introduction}
+\lipsum[1] % Placeholder text
+
+\subsection{Background}
+\lipsum[2] % Placeholder text
+
+\subsubsection{Related Work}
+\lipsum[3] % Placeholder text
+
+% Example figure
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{example-image} % Replace with your image path
+    \caption{Example figure showing a placeholder image.}
+    \label{fig:example}
+\end{figure}
+
+% Example table
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Column 1 & Column 2 & Column 3 \\ \hline
+        Data 1   & Data 2   & Data 3   \\ \hline
+        Data 4   & Data 5   & Data 6   \\ \hline
+    \end{tabular}
+    \caption{Example table with placeholder data.}
+    \label{tab:example}
+\end{table}
+
+\subsection{Another Section}
+\lipsum[4-5] % More placeholder text
+
+\subsubsection{Figures and Tables}
+Referencing Figure~\ref{fig:example} and Table~\ref{tab:example} is straightforward.
+
+\header{Header}
+
+Like a subsubsubsection that does not show up in the table of contents.
+
+\input{graphs/graph_relu.tex}
+
+\section{Conclusion}
+\lipsum[6] % Placeholder text
+\cite{vaswani2017}
+
+\newpage
+
+\medskip
+
+\addcontentsline{toc}{section}{References}
+\printbibliography
+
+\end{document}
